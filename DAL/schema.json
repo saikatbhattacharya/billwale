@@ -1,0 +1,37 @@
+{
+    "users":{
+        "name":"String",
+        "id":"String",
+        "role": "String",
+        "password": "String"
+    },
+    "items":{
+        "itemName": "String",
+        "itemId": "String",
+        "itemRate": "Number",
+        "availability": "Boolean"
+    },
+    "customers":{
+        "customerName": "String",
+        "customerMobile": "Number",
+        "customerEmail": "String",
+        "customerId": "String"
+    },
+    "orders":{
+        "orderId": "String",
+        "orderDate": "Date",
+        "orderItems": [
+            {
+                "itemId": "String",
+                "qty": "Number"   
+            }
+        ],
+        "customerMobile": "Number",
+        "totalBillValue": "Number"
+    },
+    "taxDetails":{
+        "taxName": "String",
+        "taxId": "String",
+        "taxPercentage": "Number"
+    }
+}

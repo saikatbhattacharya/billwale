@@ -1,0 +1,21 @@
+{
+  "name": "olereader",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server",
+    "lint": "jshint *.js"
+  },
+  "author": "saikat",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.16.1",
+    "express": "^4.14.0",
+    "gridfs-stream": "^1.1.1",
+    "jshint": "^2.9.4",
+    "mongoose": "^4.7.2",
+    "multer": "^1.2.1",
+    "path": "^0.12.7"
+  }
+}
