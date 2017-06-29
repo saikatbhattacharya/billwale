@@ -75,4 +75,14 @@ module.exports = function (app) {
         ]
         requestHandler.getAggregatedValue(query, res, 'orderModel');
     });
+
+    //Handling Tax data
+    app.get('/taxdetails', function (req, res) {
+        requestHandler.getAll(req, res, 'taxDetailsModel');
+    });
+
+    //Handling Items data
+    app.get('/items', function (req, res) {
+        requestHandler.getAll(req, res, 'itemsModel');
+    });
 }
