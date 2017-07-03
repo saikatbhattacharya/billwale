@@ -9,17 +9,17 @@
         "itemName": "String",
         "itemId": "String",
         "itemRate": "Number",
-        "availability": "Boolean"
+        "availability": "Boolean",
+        "quantity": "Number"
     },
     "customers":{
         "customerName": "String",
         "customerMobile": "Number",
         "customerEmail": "String",
-        "customerId": "String"
+        "lastVisitDate": "Date"
     },
     "orders":{
         "orderId": "String",
-        "orderDate": "Date",
         "orderItems": [
             {
                 "itemId": "String",
@@ -27,9 +27,17 @@
             }
         ],
         "customerMobile": "Number",
-        "totalBillValue": "Number"
+        "totalBillValue": "Number",
+        "createdDate": "Date",
+        "lastUpdatedDate": "Date",
+        "isPaid": "Boolean",
+        "orderMode": "Number"
     },
-    "taxDetails":{
+    "orderSourceMaster":{
+        "orderSourceName": "String",
+        "orderSourceCode": "Number"
+    },
+    "taxMaster":{
         "taxName": "String",
         "taxId": "String",
         "taxPercentage": "Number"
