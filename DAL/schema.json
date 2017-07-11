@@ -9,7 +9,7 @@
         "itemName": "String",
         "itemId": "String",
         "itemRate": "Number",
-        "availability": "Boolean",
+        "isAvailable": "Boolean",
         "quantity": "Number"
     },
     "customers":{
