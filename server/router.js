@@ -44,7 +44,11 @@ module.exports = function (app) {
             "orderDate": new Date(req.body.orderDate),
             "orderItems": req.body.orderItems,
             "customerMobile": req.body.customerMobile,
-            "totalBillValue": req.body.totalBillValue
+            "totalBillValue": req.body.totalBillValue,
+            "createdDate": Date.now(),
+            "lastUpdatedDate": Date.now(),
+            "isPaid": req.body.isPaid,
+            "orderMode": req.body.orderMode
         }
         requestHandler.postData('orderModel', postObj, res);
     });
