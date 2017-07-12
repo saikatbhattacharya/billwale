@@ -7,8 +7,10 @@
     },
     "items":{
         "itemName": "String",
+        "itemAltName":"String",
         "itemId": "String",
-        "itemRate": "Number",
+        "itemRateDineIn": "Number",
+        "itemRateOnline": "Number",
         "isAvailable": "Boolean",
         "quantity": "Number"
     },
