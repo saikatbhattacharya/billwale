@@ -11,7 +11,7 @@
         "itemId": "String",
         "itemRateDineIn": "Number",
         "itemRateOnline": "Number",
-        "isAvailable": "Boolean",
+        "isAvailable": "String",
         "quantity": "Number"
     },
     "customers":{
