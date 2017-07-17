@@ -21,7 +21,7 @@ module.exports = function (app) {
     });
 
     app.get('/user', function (req, res) {
-        requestHandler.getAll(req, res, 'userModel');
+        requestHandler.get(req, res, 'userModel');
     });
 
     // Handle Customer data
@@ -30,11 +30,11 @@ module.exports = function (app) {
     });
 
     app.get('/customer', function (req, res) {
-        requestHandler.getAll(req, res, 'customerModel');
+        requestHandler.get(req, res, 'customerModel');
     });
 
     app.get('/customer/customerMobile/:customerMobile', function (req, res) {
-        requestHandler.getOne(req, res, 'customerModel');
+        requestHandler.get(req, res, 'customerModel');
     });
 
     // Handle Order data
@@ -54,15 +54,15 @@ module.exports = function (app) {
     });
 
     app.get('/order', function (req, res) {
-        requestHandler.getAll(req, res, 'orderModel');
+        requestHandler.get(req, res, 'orderModel');
     });
 
     app.get('/order/orderId/:orderId', function (req, res) {
-        requestHandler.getOne(req, res, 'orderModel');
+        requestHandler.get(req, res, 'orderModel');
     });
 
     app.get('/order/customerMobile/:customerMobile', function (req, res) {
-        requestHandler.getOne(req, res, 'orderModel');
+        requestHandler.get(req, res, 'orderModel');
     });
 
     app.get('/order/latest', function (req, res) {
@@ -82,11 +82,21 @@ module.exports = function (app) {
 
     //Handling Tax data
     app.get('/taxdetails', function (req, res) {
-        requestHandler.getAll(req, res, 'taxDetailsModel');
+        requestHandler.get(req, res, 'taxesModel');
     });
 
     //Handling Items data
     app.get('/items', function (req, res) {
-        requestHandler.getAll(req, res, 'itemsModel');
+        requestHandler.get(req, res, 'itemsModel');
     });
+
+    //Handling orderSources data
+    app.get('/orderSources/orderSourceId/:orderSourceId', function (req, res) {
+        requestHandler.get(req, res, 'orderSourcesModel');
+    });
+
+    //translation
+    app.get('/translate/language/:language/itemName/:itemName', function(req, res) {
+        requestHandler.getTranslated(req, res);
+    })
 }

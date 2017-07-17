@@ -35,11 +35,11 @@
         "isPaid": "Boolean",
         "orderMode": "Number"
     },
-    "orderSourceMaster":{
+    "orderSources":{
         "orderSourceName": "String",
         "orderSourceCode": "Number"
     },
-    "taxMaster":{
+    "taxes":{
         "taxName": "String",
         "taxId": "String",
         "taxPercentage": "Number"

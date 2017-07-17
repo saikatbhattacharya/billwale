@@ -13,9 +13,13 @@
     "body-parser": "^1.16.1",
     "express": "^4.14.0",
     "gridfs-stream": "^1.1.1",
+    "http-as-promised": "^1.1.0",
     "jshint": "^2.9.4",
     "mongoose": "^4.7.2",
     "multer": "^1.2.1",
     "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   }
 }

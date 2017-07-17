@@ -13,10 +13,13 @@ var customerModel = mongoose.model('customer', customerSchema);
 var orderSchema = new mongoose.Schema(schema['orders']);
 var orderModel = mongoose.model('order', orderSchema);
 
-var taxDetailsSchema = new mongoose.Schema(schema['taxDetails']);
-var taxDetailsModel = mongoose.model('taxDetails', taxDetailsSchema);
+var orderSourcesSchema = new mongoose.Schema(schema['orderSources']);
+var orderSourcesModel = mongoose.model('orderSources', orderSourcesSchema);
+
+var taxesSchema = new mongoose.Schema(schema['taxes']);
+var taxesModel = mongoose.model('taxes', taxesSchema);
 
 module.exports = {
-  userModel, itemsModel, customerModel, orderModel, taxDetailsModel
+  userModel, itemsModel, customerModel, orderModel, orderSourcesModel, taxesModel
 }
 
