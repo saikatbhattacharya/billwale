@@ -54,7 +54,18 @@ module.exports = function (app) {
     });
 
     app.get('/order', function (req, res) {
-        requestHandler.get(req, res, 'orderModel');
+        var query = [
+           {
+             $lookup:
+                {
+                  from: "customers",
+                  localField: "customerMobile",
+                  foreignField: "customerMobile",
+                  as: "customer_info"
+                 }
+            }
+        ]
+        requestHandler.getAggregatedValue(query, res, 'orderModel');
     });
 
     app.get('/order/orderId/:orderId', function (req, res) {
