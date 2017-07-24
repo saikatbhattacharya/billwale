@@ -25,7 +25,7 @@
         "orderItems": [
             {
                 "itemId": "String",
-                "qty": "Number"   
+                "quantity": "Number"   
             }
         ],
         "customerMobile": "Number",
