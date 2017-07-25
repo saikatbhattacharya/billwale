@@ -63,7 +63,19 @@ module.exports = function (app) {
                   foreignField: "customerMobile",
                   as: "customer_info"
                  }
-            }
+            },
+            {
+                $unwind: "$orderItems"
+            },
+            {
+             $lookup:
+                {
+                  from: "items",
+                  localField: "orderItems.itemId",
+                  foreignField: "itemId",
+                  as: "item_info"
+                 }
+            },
         ]
         requestHandler.getAggregatedValue(query, res, 'orderModel');
     });
