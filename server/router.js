@@ -75,12 +75,6 @@ module.exports = function (app) {
                   foreignField: "itemId",
                   as: "item_info"
                  }
-            },
-            {
-                $group:
-                    {
-                        _id: "$orderId"
-                    }
             }
         ]
         requestHandler.getAggregatedValue(query, res, 'orderModel');
