@@ -76,6 +76,12 @@ module.exports = function (app) {
                   as: "item_info"
                  }
             },
+            {
+                $group:
+                    {
+                        _id: "$orderId"
+                    }
+            }
         ]
         requestHandler.getAggregatedValue(query, res, 'orderModel');
     });
