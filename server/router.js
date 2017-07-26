@@ -55,28 +55,39 @@ module.exports = function (app) {
 
     app.get('/order', function (req, res) {
         var query = [
-           {
-             $lookup:
-                {
-                  from: "customers",
-                  localField: "customerMobile",
-                  foreignField: "customerMobile",
-                  as: "customer_info"
-                 }
-            },
-            {
-                $unwind: "$orderItems"
-            },
-            {
-             $lookup:
-                {
-                  from: "items",
-                  localField: "orderItems.itemId",
-                  foreignField: "itemId",
-                  as: "item_info"
-                 }
-            }
-        ]
+		{
+			$lookup: {
+				
+			                  from: "customers",
+			                  localField: "customerMobile",
+			                  foreignField: "customerMobile",
+			                  as: "customer_info"
+			                 
+			}
+		},
+		{
+			$unwind: {
+			    path : "$orderItems"
+			}
+		},
+		{
+			$lookup: {
+			    from: "items",
+			                  localField: "orderItems.itemId",
+			                  foreignField: "itemId",
+			                  as: "item_info"
+			}
+		},
+		{
+			$group: {
+			 _id: {orderId: "$orderId"},
+			 items: {$push: {itemName: "$item_info.itemName", quantity: "$orderItems.qty"}},
+			 totalBillValue: {$sum: "$totalBillValue"},
+			 customerInfo: {$first: "$customer_info"}
+			}
+		},
+
+	]
         requestHandler.getAggregatedValue(query, res, 'orderModel');
     });
 
