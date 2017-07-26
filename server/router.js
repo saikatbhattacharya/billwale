@@ -81,7 +81,7 @@ module.exports = function (app) {
 		{
 			$group: {
 			 _id: {orderId: "$orderId"},
-			 items: {$push: {itemName: "$item_info.itemName", quantity: "$orderItems.qty"}},
+			 items: {$push: {item_info: "$item_info", quantity: "$orderItems.qty"}},
 			 totalBillValue: {$sum: "$totalBillValue"},
 			 customerInfo: {$first: "$customer_info"}
 			}
