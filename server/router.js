@@ -52,6 +52,24 @@ module.exports = function (app) {
         }
         requestHandler.postData('orderModel', postObj, res);
     });
+	
+    app.put('/order', function (req, res) {
+        var update = {
+            "orderDate": new Date(req.body.orderDate),
+            "orderItems": req.body.orderItems,
+            "customerMobile": req.body.customerMobile,
+            "totalBillValue": req.body.totalBillValue,
+            "createdDate": Date.now(),
+            "lastUpdatedDate": Date.now(),
+            "isPaid": req.body.isPaid,
+            "orderMode": req.body.orderMode
+        }
+	var query = {
+	    "orderId": req.body.orderId
+	}
+	var options = {upsert: true}
+        requestHandler.update('orderModel', query, update, options, res);
+    });
 
     app.get('/order', function (req, res) {
         var query = [
