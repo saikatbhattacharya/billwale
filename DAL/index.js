@@ -50,5 +50,15 @@ module.exports = {
         responseHandler.response(data, res);
       }
     })
+  },
+  UPDATE: function (modelName, query, update, options, res) {
+    model[modelName].update(query, update, options, function(err, data) {
+      if (err) {
+        responseHandler.errorRes(err, res);
+      }
+      else {
+        responseHandler.response(data, res);
+      }
+    })
   }
 };
