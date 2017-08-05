@@ -29,6 +29,9 @@ module.exports = {
     postData: function (model, postObj, res) {
         dbLayer.CREATE(model, postObj, res);
     },
+    update: function (model, query, update, options, res) {
+        dbLayer.UPDATE(model, query, update, options, res);
+    },
     getTranslated: function (req, res) {
         http(config.translationURL+'?client=gtx&sl=en&tl='+req.params['language']+'&dt=t&q=' + req.params['itemName'])
         .spread(function (response, body) {
