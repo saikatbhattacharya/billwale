@@ -124,7 +124,7 @@ module.exports = function (app) {
     app.get('/order/latest', function (req, res) {
         var query = [
             {
-                $sort : {orderDate: -1}
+                $sort : {orderId: -1}
             },
             { 
                 $limit : 1 
