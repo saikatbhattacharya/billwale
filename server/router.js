@@ -104,7 +104,7 @@ module.exports = function (app) {
 			 isPaid: {$first: "$isPaid"},
 			 orderMode: {$first: "$orderMode"},
 			 items: {$push: {item_info: "$item_info", quantity: "$orderItems.quantity"}},
-			 totalBillValue: {$sum: "$totalBillValue"},
+			 totalBillValue: {$first: "$totalBillValue"},
 			 customerInfo: {$first: "$customer_info"}
 			}
 		},
