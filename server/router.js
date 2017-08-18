@@ -145,6 +145,18 @@ module.exports = function (app) {
     app.get('/items', function (req, res) {
         requestHandler.get(req, res, 'itemsModel');
     });
+	
+    app.put('/items', function (req, res) {
+        var update = {
+            "isAvailable": req.body.isAvailable,
+            "quantity": req.body.quantity
+        }
+	var query = {
+	    "itemId": req.body.itemId
+	}
+	var options = {upsert: true}
+        requestHandler.update('itemsModel', query, update, options, res);
+    });
 
     //Handling orderSources data
     app.get('/orderSources/orderSourceId/:orderSourceId', function (req, res) {
