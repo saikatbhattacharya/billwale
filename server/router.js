@@ -114,7 +114,50 @@ module.exports = function (app) {
     });
 
     app.get('/order/orderId/:orderId', function (req, res) {
-        requestHandler.get(req, res, 'orderModel');
+        var query = [
+		{
+			$project: {
+				orderId: req.params.orderId
+			}
+		},
+		{
+			$lookup: {
+				
+			                  from: "customers",
+			                  localField: "customerMobile",
+			                  foreignField: "customerMobile",
+			                  as: "customer_info"
+			                 
+			}
+		},
+		{
+			$unwind: {
+			    path : "$orderItems"
+			}
+		},
+		{
+			$lookup: {
+			    from: "items",
+			                  localField: "orderItems.itemId",
+			                  foreignField: "itemId",
+			                  as: "item_info"
+			}
+		},
+		{
+			$group: {
+			 _id: {orderId: "$orderId"},
+			 createdDate: {$first: "$createdDate"},
+			 lastUpdatedDate: {$first: "$lastUpdatedDate"},
+			 isPaid: {$first: "$isPaid"},
+			 orderMode: {$first: "$orderMode"},
+			 items: {$push: {item_info: "$item_info", quantity: "$orderItems.quantity"}},
+			 totalBillValue: {$first: "$totalBillValue"},
+			 customerInfo: {$first: "$customer_info"}
+			}
+		},
+
+	]
+        requestHandler.getAggregatedValue(query, res, 'orderModel');
     });
 
     app.get('/order/customerMobile/:customerMobile', function (req, res) {
