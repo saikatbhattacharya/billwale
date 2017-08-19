@@ -116,7 +116,7 @@ module.exports = function (app) {
     app.get('/order/orderId/:orderId', function (req, res) {
         var query = [
 		{
-			$project: {
+			$match: {
 				orderId: req.params.orderId
 			}
 		},
