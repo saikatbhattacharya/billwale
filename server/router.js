@@ -207,7 +207,7 @@ module.exports = function (app) {
         requestHandler.get(req, res, 'paymentModesModel');
     });
     app.post('/paymentModes', function (req, res) {
-        requestHandler.postpaymentModes(req.body, res);
+        requestHandler.postData('paymentModesModel', req.body, res);
     });
 
     //Handling orderSources data
