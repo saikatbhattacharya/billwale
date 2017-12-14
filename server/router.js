@@ -48,6 +48,7 @@ module.exports = function (app) {
             "createdDate": Date.now(),
             "lastUpdatedDate": Date.now(),
             "isPaid": req.body.isPaid,
+	    "paymentMode": req.body.paymentMode,
             "orderMode": req.body.orderMode
         }
         requestHandler.postData('orderModel', postObj, res);
@@ -62,6 +63,7 @@ module.exports = function (app) {
             "createdDate": Date.now(),
             "lastUpdatedDate": Date.now(),
             "isPaid": req.body.isPaid,
+	    "paymentMode": req.body.paymentMode,
             "orderMode": req.body.orderMode
         }
 	var query = {
@@ -199,6 +201,10 @@ module.exports = function (app) {
 	}
 	var options = {upsert: true}
         requestHandler.update('itemsModel', query, update, options, res);
+    });
+    
+    app.get('/paymentModes', function (req, res) {
+        requestHandler.get(req, res, 'paymentModesModel');
     });
 
     //Handling orderSources data
