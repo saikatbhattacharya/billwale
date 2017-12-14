@@ -43,5 +43,9 @@
         "taxName": "String",
         "taxId": "String",
         "taxPercentage": "Number"
+    },
+    "paymentModes":{
+        "paymentModeName": "String",
+        "paymentModeId": "String"
     }
 }
