@@ -19,7 +19,10 @@ var orderSourcesModel = mongoose.model('orderSources', orderSourcesSchema);
 var taxesSchema = new mongoose.Schema(schema['taxes']);
 var taxesModel = mongoose.model('taxes', taxesSchema);
 
+var paymentModesSchema = new mongoose.Schema(schema['paymentModes']);
+var paymentModesModel = mongoose.model('paymentModes', paymentModesSchema);
+
 module.exports = {
-  userModel, itemsModel, customerModel, orderModel, orderSourcesModel, taxesModel
+  userModel, itemsModel, customerModel, orderModel, orderSourcesModel, taxesModel, paymentModesModel
 }
 
