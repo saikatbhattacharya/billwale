@@ -206,6 +206,9 @@ module.exports = function (app) {
     app.get('/paymentModes', function (req, res) {
         requestHandler.get(req, res, 'paymentModesModel');
     });
+    app.post('/paymentModes', function (req, res) {
+        requestHandler.postpaymentModes(req.body, res);
+    });
 
     //Handling orderSources data
     app.get('/orderSources/orderSourceId/:orderSourceId', function (req, res) {
