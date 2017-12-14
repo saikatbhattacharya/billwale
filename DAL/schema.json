@@ -33,7 +33,8 @@
         "createdDate": "Date",
         "lastUpdatedDate": "Date",
         "isPaid": "Boolean",
-        "orderMode": "Number"
+        "orderMode": "Number",
+        "paymentMode": "String"
     },
     "orderSources":{
         "orderSourceName": "String",
