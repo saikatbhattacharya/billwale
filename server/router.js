@@ -107,6 +107,7 @@ module.exports = function (app) {
 			 orderMode: {$first: "$orderMode"},
 			 items: {$push: {item_info: "$item_info", quantity: "$orderItems.quantity"}},
 			 totalBillValue: {$first: "$totalBillValue"},
+			 paymentMode: {$first: "$paymentMode"},
 			 customerInfo: {$first: "$customer_info"}
 			}
 		},
