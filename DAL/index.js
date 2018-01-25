@@ -60,5 +60,16 @@ module.exports = {
         responseHandler.response(data, res);
       }
     })
+  },
+  UPDATECB: function (modelName, query, update, options, cb) {
+    console.log('****** here in db');
+    model[modelName].update(query, update, options, function(err, data) {
+      if (err) {
+        cb(err);
+      }
+      else {
+        cb(null, data);
+      }
+    })
   }
 };

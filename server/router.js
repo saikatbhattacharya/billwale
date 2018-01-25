@@ -193,15 +193,25 @@ module.exports = function (app) {
     });
 	
     app.put('/items', function (req, res) {
-        var update = {
-            "isAvailable": req.body.isAvailable,
-            "quantity": req.body.quantity
+        var reqArray = [];
+        console.log('req.body: ', req.body);
+        for(var i = 0; i<req.body.length; i++){
+            console.log('********* inside')
+            var updateObj = {
+                update: {
+                    "isAvailable": req.body[i].isAvailable,
+                    "quantity": req.body[i].quantity
+                },
+                query: {
+                    "itemId": req.body[i].itemId
+                },
+                options: {
+                    upsert: true
+                }
+            }
+            reqArray.push(updateObj);
         }
-	var query = {
-	    "itemId": req.body.itemId
-	}
-	var options = {upsert: true}
-        requestHandler.update('itemsModel', query, update, options, res);
+        requestHandler.updateItems('itemsModel', reqArray, res);
     });
     
     app.get('/paymentModes', function (req, res) {

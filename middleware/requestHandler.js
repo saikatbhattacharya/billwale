@@ -32,6 +32,20 @@ module.exports = {
     update: function (model, query, update, options, res) {
         dbLayer.UPDATE(model, query, update, options, res);
     },
+    updateItems: function (model, upateArray, res){
+        console.log('****** here ', upateArray);
+        var counter = 0;
+        for(var i = 0; i < upateArray.length; i++){
+            console.log('****** here ', i, counter);
+            dbLayer.UPDATECB(model, upateArray[i].query, upateArray[i].update, upateArray[i].options, function(err, data){
+                if(counter === upateArray.length-1) {
+                    responseHandler.response(data, res);
+                } else {
+                    counter ++;
+                }
+            });
+        }
+    },
     getTranslated: function (req, res) {
         http(config.translationURL+'?client=gtx&sl=en&tl='+req.params['language']+'&dt=t&q=' + req.params['itemName'])
         .spread(function (response, body) {
