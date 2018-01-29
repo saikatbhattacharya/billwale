@@ -48,8 +48,9 @@ module.exports = function (app) {
             "createdDate": Date.now(),
             "lastUpdatedDate": Date.now(),
             "isPaid": req.body.isPaid,
-	    "paymentMode": req.body.paymentMode,
-            "orderMode": req.body.orderMode
+	        "paymentMode": req.body.paymentMode,
+            "orderMode": req.body.orderMode,
+            "createdBy": req.body.createdBy
         }
         requestHandler.postData('orderModel', postObj, res);
     });
@@ -60,17 +61,64 @@ module.exports = function (app) {
             "orderItems": req.body.orderItems,
             "customerMobile": req.body.customerMobile,
             "totalBillValue": req.body.totalBillValue,
-            "createdDate": Date.now(),
             "lastUpdatedDate": Date.now(),
             "isPaid": req.body.isPaid,
-	    "paymentMode": req.body.paymentMode,
+	        "paymentMode": req.body.paymentMode,
             "orderMode": req.body.orderMode
         }
-	var query = {
-	    "orderId": req.body.orderId
-	}
-	var options = {upsert: true}
+        var query = {
+            "orderId": req.body.orderId
+        }
+	    var options = {upsert: true}
         requestHandler.update('orderModel', query, update, options, res);
+    });
+
+    app.get('/order/outletId/:createdBy', function (req, res) {
+        var query = [
+            {
+                $match: {
+                    createdBy: req.params.createdBy
+                }
+            },
+            {
+                $lookup: {
+                    
+                                from: "customers",
+                                localField: "customerMobile",
+                                foreignField: "customerMobile",
+                                as: "customer_info"
+                                
+                }
+            },
+            {
+                $unwind: {
+                    path : "$orderItems"
+                }
+            },
+            {
+                $lookup: {
+                    from: "items",
+                                localField: "orderItems.itemId",
+                                foreignField: "itemId",
+                                as: "item_info"
+                }
+            },
+            {
+                $group: {
+                _id: {orderId: "$orderId"},
+                createdDate: {$first: "$createdDate"},
+                lastUpdatedDate: {$first: "$lastUpdatedDate"},
+                isPaid: {$first: "$isPaid"},
+                orderMode: {$first: "$orderMode"},
+                items: {$push: {item_info: "$item_info", quantity: "$orderItems.quantity"}},
+                totalBillValue: {$first: "$totalBillValue"},
+                paymentMode: {$first: "$paymentMode"},
+                customerInfo: {$first: "$customer_info"}
+                }
+            },
+
+	    ]
+        requestHandler.getAggregatedValue(query, res, 'orderModel');
     });
 
     app.get('/order', function (req, res) {
@@ -107,7 +155,6 @@ module.exports = function (app) {
 			 orderMode: {$first: "$orderMode"},
 			 items: {$push: {item_info: "$item_info", quantity: "$orderItems.quantity"}},
 			 totalBillValue: {$first: "$totalBillValue"},
-			 paymentMode: {$first: "$paymentMode"},
 			 customerInfo: {$first: "$customer_info"}
 			}
 		},
@@ -183,12 +230,12 @@ module.exports = function (app) {
     });
 
     //Handling Tax data
-    app.get('/taxdetails', function (req, res) {
+    app.get('/taxdetails/outletId/:createdBy', function (req, res) {
         requestHandler.get(req, res, 'taxesModel');
     });
 
     //Handling Items data
-    app.get('/items', function (req, res) {
+    app.get('/items/outletId/:createdBy', function (req, res) {
         requestHandler.get(req, res, 'itemsModel');
     });
 	
@@ -196,7 +243,6 @@ module.exports = function (app) {
         var reqArray = [];
         console.log('req.body: ', req.body);
         for(var i = 0; i<req.body.length; i++){
-            console.log('********* inside')
             var updateObj = {
                 update: {
                     "isAvailable": req.body[i].isAvailable,
@@ -214,7 +260,7 @@ module.exports = function (app) {
         requestHandler.updateItems('itemsModel', reqArray, res);
     });
     
-    app.get('/paymentModes', function (req, res) {
+    app.get('/paymentModes/outletId/:createdBy', function (req, res) {
         requestHandler.get(req, res, 'paymentModesModel');
     });
     app.post('/paymentModes', function (req, res) {

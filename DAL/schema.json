@@ -1,9 +1,12 @@
 {
     "users":{
         "name":"String",
-        "id":"String",
+        "outletId":"String",
         "role": "String",
-        "password": "String"
+        "password": "String",
+        "gstID": "String",
+        "address1": "String",
+        "address2": "String"
     },
     "items":{
         "itemName": "String",
@@ -12,13 +15,15 @@
         "itemRateDineIn": "Number",
         "itemRateOnline": "Number",
         "isAvailable": "String",
-        "quantity": "Number"
+        "quantity": "Number",
+        "createdBy": "String"
     },
     "customers":{
         "customerName": "String",
         "customerMobile": "Number",
         "customerEmail": "String",
-        "lastVisitDate": "Date"
+        "lastVisitDate": "Date",
+        "createdBy": "String"
     },
     "orders":{
         "orderId": "String",
@@ -31,6 +36,7 @@
         "customerMobile": "Number",
         "totalBillValue": "Number",
         "createdDate": "Date",
+        "createdBy": "String",
         "lastUpdatedDate": "Date",
         "isPaid": "Boolean",
         "orderMode": "Number",
@@ -38,15 +44,18 @@
     },
     "orderSources":{
         "orderSourceName": "String",
-        "orderSourceCode": "Number"
+        "orderSourceCode": "Number",
+        "createdBy": "String"
     },
     "taxes":{
         "taxName": "String",
         "taxId": "String",
-        "taxPercentage": "Number"
+        "taxPercentage": "Number",
+        "createdBy": "String"
     },
     "paymentModes":{
         "paymentModeName": "String",
-        "paymentModeId": "String"
+        "paymentModeId": "String",
+        "createdBy": "String"
     }
 }
