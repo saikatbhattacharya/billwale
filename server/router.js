@@ -67,7 +67,8 @@ module.exports = function (app) {
             "orderMode": req.body.orderMode
         }
         var query = {
-            "orderId": req.body.orderId
+            "orderId": req.body.orderId,
+	    "createdBy": req.body.createdBy
         }
 	    var options = {upsert: true}
         requestHandler.update('orderModel', query, update, options, res);
