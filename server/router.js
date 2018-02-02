@@ -215,8 +215,13 @@ module.exports = function (app) {
         requestHandler.get(req, res, 'orderModel');
     });
 
-    app.get('/order/latest', function (req, res) {
+    app.get('/order/latest/outletId/:createdBy', function (req, res) {
         var query = [
+		{
+			$match: {
+				createdBy: req.params.createdBy
+			}
+		},
             {
                 $sort : {orderId: -1}
             },
