@@ -223,7 +223,7 @@ module.exports = function (app) {
 			}
 		},
             {
-                $sort : {orderId: -1}
+                $sort : {_id: -1}
             },
             { 
                 $limit : 1 
